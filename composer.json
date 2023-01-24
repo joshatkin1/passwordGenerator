@@ -1,0 +1,26 @@
+{
+    "name": "pixled/password-generator",
+    "description": "This generates secure passwords",
+    "type": "library",
+    "require": {
+        "orchestra/testbench": "8.x-dev"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Pixled\\PasswordGenerator\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Pixled\\PasswordGenerator\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Josh Atkin",
+            "email": "joshua.atkin1@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}

@@ -1,0 +1,8 @@
+vendor/*/
+vendor/autoload.php
+.idea/
+storage/
+node_modules/
+.env
+.phpunit.result.cache
+public/
