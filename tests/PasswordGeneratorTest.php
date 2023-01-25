@@ -2,9 +2,9 @@
 
 namespace Pixled\PasswordGenerator\Tests;
 
-use Orchestra\Testbench\TestCase;
-use Pixled\PasswordGenerator\PasswordGenerator;
 use InvalidArgumentException;
+use Orchestra\Testbench\TestCase;
+use Pixled\PasswordGenerator\Models\PasswordGenerator;
 
 class PasswordGeneratorTest extends TestCase
 {
@@ -73,13 +73,4 @@ class PasswordGeneratorTest extends TestCase
         $this->assertEquals(2, $passwordGenerator::$uppercaseCharsVal);
     }
 
-//    public function testCheckPasswordGeneratorGeneratesPasswordWithCorrectConfig()
-//    {
-//        $passwordGenerator = new PasswordGenerator(10, true, true, 3, 2);
-//        $passwordGenerator::generatePassword();
-//
-//        $regexString = '';
-//
-//        preg_match($regexString, $passwordGenerator::$password);
-//    }
 }

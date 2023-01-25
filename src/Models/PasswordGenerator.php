@@ -1,6 +1,6 @@
 <?php
 
-namespace Pixled\PasswordGenerator;
+namespace Pixled\PasswordGenerator\Models;
 
 use InvalidArgumentException;
 
@@ -14,17 +14,17 @@ class PasswordGenerator
     /**
      * @var int $length This is the length of the requested password
      */
-    protected static $length = 10;
-
-    /**
-     * @var bool $uppercase Should the password include uppercase chars
-     */
-    protected static $uppercase = true;
+    protected static $length;
 
     /**
      * @var bool $lowercase Should the password include lowercase chars
      */
     protected static $lowercase;
+
+    /**
+     * @var bool $uppercase Should the password include uppercase chars
+     */
+    protected static $uppercase;
 
     /**
      * @var int $numbers Should the password include numbers
@@ -39,20 +39,22 @@ class PasswordGenerator
     /**
      * @var int $lowercaseCharsVal The amount of lowercase letters required in the password
      */
-    public static $lowercaseCharsVal = 0;
+    public static $lowercaseCharsVal;
 
     /**
      * @var int $uppercaseCharsVal The amount of uppercase letters required in the password
      */
-    public static $uppercaseCharsVal = 0;
+    public static $uppercaseCharsVal;
 
-    public function __constructor(int $length = 10, bool $lowercase = true, bool $uppercase = true, int $numbers = 1, int $special = 1): void
+    public function __construct(int $length = 10, bool $lowercase = true, bool $uppercase = true, int $numbers = 1, int $special = 1)
     {
         self::$length = $length;
         self::$uppercase = $uppercase;
         self::$lowercase = $lowercase;
         self::$numbers = $numbers;
         self::$special = $special;
+        self::$lowercaseCharsVal = 0;
+        self::$uppercaseCharsVal = 0;
     }
 
     /**
@@ -80,6 +82,10 @@ class PasswordGenerator
      */
     static protected function validatePasswordGenerationConfiguration(): void
     {
+        if(self::$length > 250){
+            throw new InvalidArgumentException('requested password length is too long, max 100');
+        }
+
         //Firstly check min amount of a-zA-Z chars required
         $charsReqValue = 0;
         $charsReqValue = (self::$lowercase === true) ? $charsReqValue++ : $charsReqValue;
@@ -119,12 +125,12 @@ class PasswordGenerator
 
             //Check if available chars are even to share equally otherwise allocate lowercase remainder
             if( $charsAvailable % 2 === 0 ){
-                self::$lowercaseCharsVal = self::$length / 2;
-                self::$uppercaseCharsVal = self::$length / 2;
+                self::$lowercaseCharsVal = $charsAvailable / 2;
+                self::$uppercaseCharsVal = $charsAvailable / 2;
             }else{
-                self::$lowercaseCharsVal = (self::$length - 1) / 2;
+                self::$lowercaseCharsVal = ($charsAvailable - 1) / 2;
                 self::$lowercaseCharsVal++;
-                self::$uppercaseCharsVal = (self::$length - 1) / 2;
+                self::$uppercaseCharsVal = ($charsAvailable - 1) / 2;
             }
 
         } elseif (self::$lowercase === true){
