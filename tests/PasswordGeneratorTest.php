@@ -4,7 +4,7 @@ namespace Pixled\PasswordGenerator\Tests;
 
 use InvalidArgumentException;
 use Orchestra\Testbench\TestCase;
-use Pixled\PasswordGenerator\Models\PasswordGenerator;
+use Pixled\PasswordGenerator\Service\PasswordGenerator;
 
 class PasswordGeneratorTest extends TestCase
 {

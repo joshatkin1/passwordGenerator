@@ -1,6 +1,6 @@
 <?php
 
-namespace Pixled\PasswordGenerator\Models;
+namespace Pixled\PasswordGenerator\Service;
 
 use InvalidArgumentException;
 
